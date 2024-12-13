@@ -38,7 +38,7 @@ If you have access to the source code:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/username/jsonlib.git
+git clone https://github.com/Edmundtutu/jsonlib.git
 ```
 
 2. Install to local Maven repository:
