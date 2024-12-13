@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JsonUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jsonlib</a> &gt; <a href="index.source.html" class="el_package">com.app.utils</a> &gt; <span class="el_source">JsonUtil.java</span></div><h1>JsonUtil.java</h1><pre class="source lang-java linenums">package com.app.utils;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.core.type.TypeReference;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.List;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+/**
+ * A utility class that provides simplified JSON operations using Jackson ObjectMapper.
+ * This class offers methods for serialization, deserialization, and JSON manipulation
+ * with built-in null checks and exception handling.
+ *
+ * @author Edmund Tutuma
+ * @version 1.0
+ * @since 2024-03-19
+ */
+<span class="nc" id="L21">public class JsonUtil {</span>
+    /** Shared ObjectMapper instance for all JSON operations */
+<span class="fc" id="L23">    private static final ObjectMapper objectMapper = new ObjectMapper()</span>
+<span class="fc" id="L24">        .registerModule(new JavaTimeModule());</span>
+
+    /**
+     * Converts a Java object to its JSON string representation.
+     *
+     * @param obj the object to be converted to JSON
+     * @return a JSON string representation of the object
+     * @throws IllegalArgumentException if the input object is null
+     * @throws RuntimeException if serialization fails
+     */
+    public static String toJson(Object obj) {
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (obj == null) {</span>
+<span class="fc" id="L36">            throw new IllegalArgumentException(&quot;Input object cannot be null&quot;);</span>
+        }
+        try {
+<span class="fc" id="L39">            return objectMapper.writeValueAsString(obj);</span>
+<span class="nc" id="L40">        } catch (Exception e) {</span>
+<span class="nc" id="L41">            throw new RuntimeException(&quot;Error serializing object to JSON&quot;, e);</span>
+        }
+    }
+
+    /**
+     * Converts a JSON string to a Java object of the specified class.
+     *
+     * @param &lt;T&gt; the type parameter for the target class
+     * @param json the JSON string to deserialize
+     * @param clazz the target class to convert the JSON into
+     * @return an instance of T containing the deserialized data
+     * @throws IllegalArgumentException if either json or clazz is null
+     * @throws RuntimeException if deserialization fails
+     */
+    public static &lt;T&gt; T fromJson(String json, Class&lt;T&gt; clazz) {
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (json == null) {</span>
+<span class="fc" id="L57">            throw new IllegalArgumentException(&quot;JSON string cannot be null&quot;);</span>
+        }
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (clazz == null) {</span>
+<span class="fc" id="L60">            throw new IllegalArgumentException(&quot;Target class cannot be null&quot;);</span>
+        }
+        try {
+<span class="fc" id="L63">            return objectMapper.readValue(json, clazz);</span>
+<span class="fc" id="L64">        } catch (Exception e) {</span>
+<span class="fc" id="L65">            throw new RuntimeException(&quot;Error deserializing JSON to object&quot;, e);</span>
+        }
+    }
+    
+
+    /**
+     * Writes a Java object as JSON to an output stream with optional pretty printing.
+     *
+     * @param outputStream the stream to write the JSON to
+     * @param obj the object to be written as JSON
+     * @param options configuration options for JSON writing (can be null)
+     * @throws IllegalArgumentException if outputStream or obj is null
+     * @throws RuntimeException if writing to the stream fails
+     */
+    public static void toJsonFile(OutputStream outputStream, Object obj, WriteOptions options) {
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        if (outputStream == null) {</span>
+<span class="fc" id="L81">            throw new IllegalArgumentException(&quot;OutputStream cannot be null&quot;);</span>
+        }
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (obj == null) {</span>
+<span class="fc" id="L84">            throw new IllegalArgumentException(&quot;Input object cannot be null&quot;);</span>
+        }
+        try {
+<span class="pc bpc" id="L87" title="2 of 4 branches missed.">            if(options != null &amp;&amp; options.isPrettyPrint()){</span>
+<span class="fc" id="L88">                objectMapper.writerWithDefaultPrettyPrinter().writeValue(outputStream, obj);</span>
+            }else{
+<span class="nc" id="L90">                objectMapper.writeValue(outputStream, obj);</span>
+            }
+<span class="nc" id="L92">        } catch (Exception e) {</span>
+<span class="nc" id="L93">            throw new RuntimeException(&quot;Error writing JSON to stream&quot;, e);</span>
+<span class="fc" id="L94">        }</span>
+<span class="fc" id="L95">    }</span>
+    
+    /**
+     * Reads JSON from an input stream and converts it to a Java object.
+     *
+     * @param &lt;T&gt; the type parameter for the target class
+     * @param inputStream the stream containing JSON data
+     * @param clazz the target class to convert the JSON into
+     * @return an instance of T containing the deserialized data
+     * @throws IllegalArgumentException if either inputStream or clazz is null
+     * @throws RuntimeException if reading from the stream fails
+     */
+    public static &lt;T&gt; T fromJsonFile(InputStream inputStream, Class&lt;T&gt; clazz) {
+<span class="fc bfc" id="L108" title="All 2 branches covered.">        if (inputStream == null) {</span>
+<span class="fc" id="L109">            throw new IllegalArgumentException(&quot;InputStream cannot be null&quot;);</span>
+        }
+<span class="fc bfc" id="L111" title="All 2 branches covered.">        if (clazz == null) {</span>
+<span class="fc" id="L112">            throw new IllegalArgumentException(&quot;Target class cannot be null&quot;);</span>
+        }
+        try {
+<span class="fc" id="L115">            return objectMapper.readValue(inputStream, clazz);</span>
+<span class="nc" id="L116">        } catch (Exception e) {</span>
+<span class="nc" id="L117">            throw new RuntimeException(&quot;Error reading JSON from stream&quot;, e);</span>
+        }
+    }
+
+    /**
+     * Converts a JSON array string to a List of objects of the specified class.
+     *
+     * @param &lt;T&gt; the type parameter for the list elements
+     * @param json the JSON array string to deserialize
+     * @param clazz the class type of the list elements
+     * @return a List of type T containing the deserialized data
+     * @throws RuntimeException if deserialization fails
+     */
+    public static &lt;T&gt; List&lt;T&gt; fromJsonArray(String json, Class&lt;T&gt; clazz) {
+        try {
+<span class="nc" id="L132">            return objectMapper.readValue(json, objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));</span>
+<span class="nc" id="L133">        } catch (Exception e) {</span>
+<span class="nc" id="L134">            throw new RuntimeException(&quot;Error deserializing JSON array to object&quot;, e);</span>
+        }
+    }
+
+    /**
+     * Converts a JSON string to a Java object using a TypeReference for complex types.
+     * Useful for generic types like {@code List&lt;CustomObject&gt;} or {@code Map&lt;String, CustomObject&gt;}.
+     *
+     * @param &lt;T&gt; the type parameter for the target type
+     * @param json the JSON string to deserialize
+     * @param typeReference the TypeReference describing the target type
+     * @return an instance of T containing the deserialized data
+     * @throws RuntimeException if deserialization fails
+     */
+    public static &lt;T&gt; T fromJson(String json, TypeReference&lt;T&gt; typeReference) {
+        try {
+<span class="nc" id="L150">            return objectMapper.readValue(json, typeReference);</span>
+<span class="nc" id="L151">        } catch (Exception e) {</span>
+<span class="nc" id="L152">            throw new RuntimeException(&quot;Error deserializing JSON to object&quot;, e);</span>
+        }
+    }
+
+    /**
+     * Converts a Java object to a Jackson ObjectNode.
+     * Useful for dynamic JSON manipulation.
+     *
+     * @param obj the object to convert to an ObjectNode
+     * @return an ObjectNode representation of the input object
+     * @throws RuntimeException if conversion fails
+     */
+    public static ObjectNode toJsonNode(Object obj) {
+        try {
+<span class="nc" id="L166">            return objectMapper.valueToTree(obj);</span>
+<span class="nc" id="L167">        } catch (Exception e) {</span>
+<span class="nc" id="L168">            throw new RuntimeException(&quot;Error converting object to JSON node&quot;, e);</span>
+        }
+    }
+
+    /**
+     * Converts a Jackson JsonNode to a Java object of the specified class.
+     *
+     * @param &lt;T&gt; the type parameter for the target class
+     * @param node the JsonNode to convert
+     * @param clazz the target class to convert the node into
+     * @return an instance of T containing the converted data
+     * @throws RuntimeException if conversion fails
+     */
+    public static &lt;T&gt; T fromJsonNode(JsonNode node, Class&lt;T&gt; clazz) {
+        try {
+<span class="nc" id="L183">            return objectMapper.treeToValue(node, clazz);</span>
+<span class="nc" id="L184">        } catch (Exception e) {</span>
+<span class="nc" id="L185">            throw new RuntimeException(&quot;Error converting JSON node to object&quot;, e);</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

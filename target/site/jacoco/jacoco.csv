@@ -1,0 +1,6 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+jsonlib,com.app.utils,JsonUtil,81,92,2,16,20,25,7,12,5,5
+jsonlib,com.app.utils,WriteOptions,24,17,0,0,9,6,6,3,6,3
+jsonlib,com.app,Main,165,0,0,0,50,0,7,0,7,0
+jsonlib,com.app,Main.new TypeReference() {...},3,0,0,0,1,0,1,0,1,0
+jsonlib,com.app,Event,36,0,0,0,12,0,8,0,8,0

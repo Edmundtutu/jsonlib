@@ -1,0 +1,56 @@
+@options
+@packages
+@argfile
+-classpath
+'C:/Users/ADMIN/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.0/jackson-databind-2.15.0.jar;C:/Users/ADMIN/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.0/jackson-core-2.15.0.jar;C:/Users/ADMIN/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.0/jackson-annotations-2.15.0.jar;C:/Users/ADMIN/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.15.0/jackson-datatype-jsr310-2.15.0.jar'
+-encoding
+'Cp1252'
+-protected
+-source
+'17'
+-sourcepath
+'C:/Most of the files/Projects/jsonlib/src/main/java;C:/Most of the files/Projects/jsonlib/target/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Most of the files/Projects/jsonlib/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'jsonlib 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'jsonlib 1.0-SNAPSHOT API'
+com.app
+com.app.utils
+'C:/Most of the files/Projects/jsonlib/src/main/java/com/app/Event.java'
+'C:/Most of the files/Projects/jsonlib/src/main/java/com/app/Main.java'
+'C:/Most of the files/Projects/jsonlib/src/main/java/com/app/utils/JsonUtil.java'
+'C:/Most of the files/Projects/jsonlib/src/main/java/com/app/utils/WriteOptions.java'
+C:\Users\ADMIN\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.0\jackson-databind-2.15.0.jar = 1733947573920
+C:\Users\ADMIN\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.0\jackson-core-2.15.0.jar = 1733947605954
+C:\Users\ADMIN\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.0\jackson-annotations-2.15.0.jar = 1733947574485
+C:\Users\ADMIN\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.15.0\jackson-datatype-jsr310-2.15.0.jar = 1734005833476
+C:\Most of the files\Projects\jsonlib\src\main\java = 1733557008499
+C:\Most of the files\Projects\jsonlib\target\generated-sources\annotations = 1734065889057
+C:\Most of the files\Projects\jsonlib\target\apidocs\allclasses-index.html = 1734065903055
+C:\Most of the files\Projects\jsonlib\target\apidocs\allpackages-index.html = 1734065903062
+C:\Most of the files\Projects\jsonlib\target\apidocs\element-list = 1734065902842
+C:\Most of the files\Projects\jsonlib\target\apidocs\help-doc.html = 1734065903226
+C:\Most of the files\Projects\jsonlib\target\apidocs\index-all.html = 1734065903156
+C:\Most of the files\Projects\jsonlib\target\apidocs\index.html = 1734065903027
+C:\Most of the files\Projects\jsonlib\target\apidocs\jquery-ui.overrides.css = 1734065903308
+C:\Most of the files\Projects\jsonlib\target\apidocs\member-search-index.js = 1734065903073
+C:\Most of the files\Projects\jsonlib\target\apidocs\module-search-index.js = 1734065903065
+C:\Most of the files\Projects\jsonlib\target\apidocs\overview-summary.html = 1734065903188
+C:\Most of the files\Projects\jsonlib\target\apidocs\overview-tree.html = 1734065903020
+C:\Most of the files\Projects\jsonlib\target\apidocs\package-search-index.js = 1734065903069
+C:\Most of the files\Projects\jsonlib\target\apidocs\script.js = 1734065903234
+C:\Most of the files\Projects\jsonlib\target\apidocs\search.js = 1734065903248
+C:\Most of the files\Projects\jsonlib\target\apidocs\stylesheet.css = 1734065903231
+C:\Most of the files\Projects\jsonlib\target\apidocs\tag-search-index.js = 1734065903075
+C:\Most of the files\Projects\jsonlib\target\apidocs\type-search-index.js = 1734065903071
